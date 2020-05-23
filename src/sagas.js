@@ -16,13 +16,13 @@ function* watchIncrementAsync() {
 }
 
 export function* fetchUser({payload}) {
-    try {
-        const user = yield call(Api.fetchUser, payload.url);
+    const {response, error} = yield call(Api.fetchUser, payload.url);
+    if (response) {
         yield put({
             type: "FETCH_USER_SUCCEEDED",
-            payload: user
+            payload: response
         })
-    } catch (error) {
+    } else {
         yield put({type: "FETCH_USER_FAILED", error});
     }
 }

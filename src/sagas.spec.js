@@ -34,11 +34,25 @@ test("fetchUser saga test", (assert) => {
     
     let user = {id: 3};
     assert.deepEqual(
-        generator.next(user).value,
+        generator.next({response: user}).value,
         put({type: "FETCH_USER_SUCCEEDED", payload: user}),
         "should dispatch FETCH_USER_SUCCEEDED"
     );
     
+    assert.end();
+});
+
+test("fetchUser saga test error", (assert) => {
+    const generator = fetchUser({type: "FETCH_USER_REQUESTED", payload: {url: "urlhere"}});
+    
+    generator.next();
+    
+    let error = {};
+    assert.deepEqual(
+        generator.next({error: error}).value,
+        put({type: "FETCH_USER_FAILED", error: error}),
+        "should dispatch FETCH_USER_FAILED"
+    );
     
     assert.end();
 });
