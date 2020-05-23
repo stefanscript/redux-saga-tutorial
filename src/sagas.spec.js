@@ -32,9 +32,10 @@ test("fetchUser saga test", (assert) => {
         "should fetch the user with url"
     );
     
+    let user = {id: 3};
     assert.deepEqual(
-        generator.next().value,
-        put({ type: "FETCH_USER_SUCCEEDED", payload: undefined}),
+        generator.next(user).value,
+        put({type: "FETCH_USER_SUCCEEDED", payload: user}),
         "should dispatch FETCH_USER_SUCCEEDED"
     );
     
