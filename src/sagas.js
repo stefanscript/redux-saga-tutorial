@@ -15,9 +15,9 @@ function* watchIncrementAsync() {
     yield takeEvery("INCREMENT_ASYNC", incrementAsync);
 }
 
-export function* fetchData(action) {
+export function* fetchUser({payload}) {
     try {
-        const user = yield call(Api.fetchUser, action.payload.url);
+        const user = yield call(Api.fetchUser, payload.url);
         yield put({
             type: "FETCH_USER_SUCCEEDED",
             payload: user
@@ -28,7 +28,7 @@ export function* fetchData(action) {
 }
 
 function* watchFetchUser() {
-    yield takeLatest("FETCH_USER_REQUESTED", fetchData);
+    yield takeLatest("FETCH_USER_REQUESTED", fetchUser);
     
 }
 
