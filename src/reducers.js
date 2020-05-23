@@ -1,4 +1,4 @@
-export default function counter(state = 0, action) {
+export function counter(state = 0, action) {
   switch (action.type) {
     case 'INCREMENT':
       return state + 1
@@ -9,4 +9,12 @@ export default function counter(state = 0, action) {
     default:
       return state
   }
+}
+
+export function user(state={}, action) {
+  switch(action.type) {
+    case "FETCH_USER_SUCCEEDED":
+      return {id: action.payload.id, name: action.payload.name}
+  }
+  return state;
 }
