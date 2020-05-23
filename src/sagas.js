@@ -12,7 +12,7 @@ export function* incrementAsync() {
 }
 
 function* watchIncrementAsync() {
-    yield takeEvery("INCREMENT_ASYNC", incrementAsync);
+    yield takeLatest("INCREMENT_ASYNC", incrementAsync);
 }
 
 export function* fetchUser({payload}) {
